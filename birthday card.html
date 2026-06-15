@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday Card</title>
+  <style>
+    :root{
+      --bg1:#ff9a9e; --bg2:#fad0c4; --card:#fff;
+      --accent:#ffcc00; --muted:#6b6b6b;
+    }
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;}
+    body{
+      background: radial-gradient(circle at 10% 10%, #ffd89b 0%, transparent 20%),
+                  radial-gradient(circle at 90% 90%, #ff9a9e 0%, transparent 20%),
+                  linear-gradient(135deg,var(--bg1),var(--bg2));
+      display:flex;align-items:center;justify-content:center;padding:24px;
+    }
+
+    /* Card */
+    .card {
+      width:100%;
+      max-width:920px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.9));
+      border-radius:20px;
+      box-shadow:0 20px 50px rgba(10,20,40,0.25);
+      overflow:hidden;
+      position:relative;
+    }
+
+    /* confetti decoration */
+    .confetti{
+      pointer-events:none;
+      position:absolute;inset:0;z-index:0;opacity:.9;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(255,255,255,0.15) 0 2px, transparent 3px),
+        radial-gradient(circle at 30% 40%, rgba(255,255,255,0.12) 0 2px, transparent 3px);
+      mix-blend-mode:overlay;
+    }
+
+    .hero{
+      padding:36px 36px 20px 36px;
+      display:flex;gap:24px;align-items:center;z-index:1;position:relative;
+      flex-wrap:wrap;
+    }
+    .left{
+      flex:1 1 360px;
+    }
+    .title{
+      font-size:clamp(28px,4vw,42px);
+      margin:0;color:#222;font-weight:700;letter-spacing:-0.02em;
+      display:flex;align-items:center;gap:12px;
+    }
+    .star{
+      display:inline-block;width:56px;height:56px;border-radius:10px;
+      background:linear-gradient(135deg,#ffd54a,#ffb74d);
+      box-shadow:0 6px 18px rgba(255,165,0,0.25);
+      display:flex;align-items:center;justify-content:center;font-size:28px;
+    }
+    .subtitle{
+      margin:8px 0 16px;color:var(--muted);font-size:15px;
+    }
+
+    /* card preview area */
+    .preview {
+      flex:1 1 420px;
+      background:linear-gradient(135deg,#fff,#fff);
+      border-radius:14px;padding:20px;
+      border: 2px dashed rgba(0,0,0,0.04);
+      min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    }
+    .greeting {
+      font-size:26px;font-weight:700;color:#222;margin:6px 0;
+      text-align:center;
+    }
+    .message {
+      color:#333;font-size:16px;line-height:1.45;text-align:center;padding:0 12px;
+    }
+    .from{
+      margin-top:14px;font-weight:600;color:var(--muted);
+    }
+
+    /* controls */
+    .controls{
+      padding:16px 36px 36px 36px;display:flex;gap:18px;flex-wrap:wrap;align-items:center;z-index:1;
+      background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95));
+    }
+    label{font-size:13px;color:#333;display:block;margin-bottom:6px;}
+    .field{display:flex;gap:12px;flex-wrap:wrap;align-items:center;width:100%;}
+    input[type="text"], textarea, select {
+      padding:10px 12px;border:1px solid rgba(0,0,0,0.08);border-radius:8px;
+      width:220px;background:#fff;
+    }
+    textarea{height:84px;resize:vertical;width:420px;max-width:100%;}
+    .btn {
+      background:linear-gradient(90deg,#ff8a65,#ff7043);
+      color:#fff;padding:10px 16px;border-radius:10px;border:none;font-weight:700;cursor:pointer;
+      box-shadow:0 8px 18px rgba(255,112,67,0.18);
+    }
+    .btn.secondary{background:transparent;color:#ff7043;border:2px solid rgba(255,112,67,0.18);box-shadow:none}
+    .actions{display:flex;gap:10px;align-items:center;margin-left:auto;}
+
+    /* small screens */
+    @media (max-width:820px){
+      .hero{padding:20px}
+      .left, .preview{flex:1 1 100%;}
+      .controls{padding:16px}
+      textarea{width:100%;}
+    }
+
+    /* subtle confetti pieces (css-only) */
+    .confetti:before, .confetti:after{
+      content:"";position:absolute;inset:0;pointer-events:none;
+      background-image:
+        linear-gradient(transparent 30%, rgba(255,255,255,0.02) 30%),
+        radial-gradient(circle at 10% 20%, #ffcc00 0 6px, transparent 8px),
+        radial-gradient(circle at 30% 40%, #ff5e9e 0 6px, transparent 8px),
+        radial-gradient(circle at 70% 60%, #7ee1ff 0 6px, transparent 8px),
+        radial-gradient(circle at 85% 15%, #b2ff7a 0 6px, transparent 8px);
+      opacity:0.6;mix-blend-mode:screen;
+      transform:translateY(-8px) rotate(-2deg);filter:blur(.4px);
+    }
+
+    /* small helper */
+    .note{font-size:13px;color:var(--muted);margin-top:8px}
+  </style>
+</head>
+<body>
+  <div class="card" role="main" aria-labelledby="cardTitle">
+    <div class="confetti" aria-hidden="true"></div>
+
+    <div class="hero">
+      <div class="left">
+        <div class="title" id="cardTitle">
+          <div class="star">🎂</div>
+          Happy Birthday!
+        </div>
+        <p class="subtitle">Personalize the card on the right, preview, then send or print.</p>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <div style="min-width:200px;">
+            <label for="toName">To (name)</label>
+            <input id="toName" type="text" placeholder="e.g., Sarah" value="Friend">
+          </div>
+
+          <div style="min-width:200px;">
+            <label for="fromName">From</label>
+            <input id="fromName" type="text" placeholder="Your name" value="Your Friend">
+          </div>
+        </div>
+
+        <div style="margin-top:12px;">
+          <label for="messageText">Message</label>
+          <textarea id="messageText" maxlength="400">Wishing you a day filled with love, cake, and wonderful surprises. Happy Birthday!</textarea>
+        </div>
+
+        <div class="note">Tip: Keep the message short for best layout on phones.</div>
+      </div>
+
+      <div class="preview" id="previewCard" aria-live="polite">
+        <div style="background:linear-gradient(135deg,#ffe7c2,#fff);padding:18px;border-radius:12px;width:90%;box-shadow:0 8px 20px rgba(0,0,0,0.08)">
+          <div style="font-size:14px;color:#ff6b6b;font-weight:700;text-align:center">🎉 Celebrate!</div>
+          <div class="greeting" id="greetingPreview">Happy Birthday, Friend!</div>
+          <div class="message" id="messagePreview">Wishing you a day filled with love, cake, and wonderful surprises. Happy Birthday!</div>
+          <div class="from" id="fromPreview">— From Your Friend</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div style="display:flex;gap:12px;align-items:center;width:100%;flex-wrap:wrap;">
+        <div>
+          <label for="theme">Theme</label><br>
+          <select id="theme">
+            <option value="warm">Warm</option>
+            <option value="blue">Ocean Blue</option>
+            <option value="pastel">Pastel</option>
+            <option value="dark">Dark Glow</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="fontSize">Text size</label><br>
+          <select id="fontSize">
+            <option value="16">Normal</option>
+            <option value="18">Large</option>
+            <option value="22">Bigger</option>
+          </select>
+        </div>
+
+        <div style="flex:1 1 220px">
+          <label for="emailTo">Send via Email (optional)</label><br>
+          <input id="emailTo" type="text" placeholder="friend@example.com">
+        </div>
+
+        <div class="actions">
+          <button class="btn" id="copyBtn" title="Copy card text">Copy</button>
+          <button class="btn secondary" id="printBtn" title="Print or Save as PDF">Print / Save</button>
+          <button class="btn" id="emailBtn" title="Open email client">Send Email</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // elements
+    const toName = document.getElementById('toName');
+    const fromName = document.getElementById('fromName');
+    const messageText = document.getElementById('messageText');
+    const greetingPreview = document.getElementById('greetingPreview');
+    const messagePreview = document.getElementById('messagePreview');
+    const fromPreview = document.getElementById('fromPreview');
+    const theme = document.getElementById('theme');
+    const fontSize = document.getElementById('fontSize');
+    const printBtn = document.getElementById('printBtn');
+    const emailBtn = document.getElementById('emailBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const emailTo = document.getElementById('emailTo');
+
+    function updatePreview(){
+      const name = toName.value.trim() || 'Friend';
+      const from = fromName.value.trim() || 'Your Friend';
+      greetingPreview.textContent = `Happy Birthday, ${name}!`;
+      messagePreview.textContent = messageText.value;
+      fromPreview.textContent = `— From ${from}`;
+
+      // font size
+      document.querySelectorAll('.greeting, .message, .from').forEach(el=>{
+        el.style.fontSize = (fontSize.value*1) + 'px';
+      });
+    }
+
+    // theme switcher
+    function applyTheme(){
+      const card = document.querySelector('.card');
+      switch(theme.value){
+        case 'blue':
+          card.style.background = 'linear-gradient(180deg, rgba(240,250,255,0.95), rgba(245,255,255,0.9))';
+          document.body.style.background = 'linear-gradient(135deg,#a8edea,#fed6e3)';
+          break;
+        case 'pastel':
+          card.style.background = 'linear-gradient(180deg, rgba(255,255,250,0.95), rgba(250,255,255,0.9))';
+          document.body.style.background = 'linear-gradient(135deg,#fbc2eb,#a6c1ee)';
+          break;
+        case 'dark':
+          card.style.background = 'linear-gradient(180deg, rgba(10,10,20,0.9), rgba(15,15,30,0.85))';
+          document.body.style.background = 'linear-gradient(135deg,#0f2027,#203a43)';
+          break;
+        default:
+          card.style.background = '';
+          document.body.style.background = 'linear-gradient(135deg,#ff9a9e,#fad0c4)';
+      }
+    }
+
+    // email sending (mailto)
+    function sendEmail(){
+      const to = emailTo.value.trim();
+      const subject = `Happy Birthday ${toName.value || 'Friend'}!`;
+      const body = `${greetingPreview.textContent}%0D%0A%0D%0A${encodeURIComponent(messageText.value)}%0D%0A%0D%0A${fromPreview.textContent}`;
+      if(!to){
+        // open blank email with subject & body
+        window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${body}`;
+      } else {
+        window.location.href = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${body}`;
+      }
+    }
+
+    // print
+    printBtn.addEventListener('click', ()=> window.print());
+
+    // copy text
+    copyBtn.addEventListener('click', async ()=>{
+      const text = `${greetingPreview.textContent}\n\n${messageText.value}\n\n${fromPreview.textContent}`;
+      try{
+        await navigator.clipboard.writeText(text);
+        copyBtn.textContent = 'Copied!';
+        setTimeout(()=> copyBtn.textContent = 'Copy',1500);
+      }catch(e){
+        alert('Copy not supported. You can select the text and copy manually.');
+      }
+    });
+
+    // update events
+    [toName, fromName, messageText, fontSize, theme].forEach(el=> el.addEventListener('input', ()=>{
+      updatePreview(); applyTheme();
+    }));
+
+    emailBtn.addEventListener('click', sendEmail);
+
+    // initial render
+    updatePreview();
+    applyTheme();
+  </script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GAMEONE - 100 Ball Gaming</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(#002244, #005577);
+      color: #fff;
+      text-align: center;
+    }
+    header {
+      padding: 30px;
+      background: #001122;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+    section {
+      margin: 20px 0;
+      background: #ffffff10;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    h2 {
+      color: #00ccff;
+    }
+    input, select, button {
+      padding: 10px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+    button {
+      background: #00ccff;
+      color: #000;
+      cursor: pointer;
+    }
+    .ball {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      margin: 5px;
+      line-height: 40px;
+      border-radius: 50%;
+      background: #fff;
+      color: #000;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="img\gameball.jpg"><h1>GAMEONE</h1>
+    <p>100 Ball Game - Try Your Luck!</p>
+    <span><h2>PLAY AS LOW AS N50</h2></span>
+    <p>This is how to enter the game, fill the short form and genrate receipt, write down you receipt number.</p><span>For winning enter your winning number with your receipt number complete the form details and send.</span>
+  </header>
+
+  <div class="container">
+    <section>
+      <h2>Play Game</h2>
+      <form id="playForm">
+
+        <label>Select Game Time:</label>
+        <select name="gameTime">
+          <option>10:30am<p> FALAMU</p></option>
+          <option>2:30pm<p> CAPHORAH</p></option>
+          <option>4:00pm<p> WESTERN</p></option>
+          <option>8:00pm<p> DIVINE</p></option>
+          <option>8:30pm<p> QUEENS</p></option>
+        </select><br>
+
+        <label>Select 5 Numbers (1-100):</label><br>
+        <input type="text" name="numbers" placeholder="e.g., 0,0,0,0,0"><br>
+        <input type="text" placeholder="Full Name" required><br>
+        <input type="tel" name="phone" placeholder="Enter Phone Number" required><br>
+       <button type="submit"> <a href=https://paylink.monnify.com/JBSmbm>Pay and Play</a>
+        <form
+
+
+  action="https://formspree.io/f/xpwdgage"
+  method="POST"
+>
+        <button type="submit">Generate Receipt</button>
+      </form>
+      <div id="receipt"></div>
+    </section>
+
+    <section>
+      <h2>Admin Panel</h2>
+      <button onclick="generateResults()">Generate Winning & Machine Numbers</button>
+      <div id="results"></div>
+    </section>
+ <form
+
+  action="mailto:infocare@waltztech.com.ng"Email Us
+  method="POST"
+>
+
+    <section>
+      <h2>Submit Winning</h2>
+     
+  <label>
+    Your Name:
+    <input type="fullName" name="name">
+        <input type="text" name="Winning numbers" placeholder="Winning no e.g., 0,0,0,0,0"><br>
+  </label>
+  <label>
+    <input type="number" placeholder="ticket no" required><br>
+        <input type="number" placeholder="Age" required><br>
+        <input type="tel" placeholder="Phone Number" required><br></label>
+        <button type="submit">Submit Claim</button>
+      </form>
+    </section>
+  </div>
+</form>
+<!-- your other form fields go here -->
+  <script>
+    
+
+    function generateBalls() {
+      const balls = [];
+      while (balls.length < 5) {
+        let rand = Math.floor(Math.random() * 100) + 1;
+        if (!balls.includes(rand)) balls.push(rand);
+      }
+      return balls;
+    }
+
+    function generateResults() {
+      const win = generateBalls();
+      const machine = generateBalls();
+      document.getElementById("results").innerHTML = `
+        <h3>Winning Numbers</h3>
+        ${win.map(n => `<span class='ball'>${n}</span>`).join('')}
+        <h3>Machine Numbers</h3>
+        ${machine.map(n => `<span class='ball'>${n}</span>`).join('')}
+      `;
+    }
+
+    document.getElementById("playForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const phone = this.phone.value;
+      const receipt = Math.floor(100000 + Math.random() * 900000);
+      document.getElementById("receipt").innerHTML = `<p>Click Pay and Play! Receipt No: <strong>${receipt}</strong><br>Sent to ${phone}</p>`;
+      this.reset();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GAMEONE - 100 Ball Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    .game-box {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .numbers {
+      margin: 10px 0;
+    }
+    .number {
+      display: inline-block;
+      margin: 5px;
+      padding: 10px;
+      background: #3498db;
+      color: white;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      line-height: 20px;
+      font-weight: bold;
+    }
+    .btn {
+      margin: 20px auto;
+      padding: 10px 20px;
+      background: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    .schedule {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>GAMEONE - 100 Ball Game</h1>
+  <div class="game-box">
+    <button class="btn" id="playBtn" onclick="playGame()">Play Game</button>
+    <div class="numbers">
+      <h3>Winning Numbers</h3>
+      <div id="winningNumbers"></div>
+    </div>
+    <div class="numbers">
+      <h3>Machine Numbers</h3>
+      <div id="machineNumbers"></div>
+    </div>
+    <div class="schedule">
+      Game Times: 10:30am, 2:30pm, 4:00pm, 8:00pm, 8:30pm
+    </div>
+  </div>
+
+  <script>
+    const gameTimes = [
+      "10:30",
+      "14:30",
+      "16:00",
+      "20:00",
+      "20:30"
+    ];
+
+    function getRandomNumbers(count, max) {
+      const numbers = new Set();
+      while (numbers.size < count) {
+        numbers.add(Math.floor(Math.random() * max) + 1);
+      }
+      return Array.from(numbers);
+    }
+
+    function displayNumbers(containerId, numbers) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+      numbers.forEach(num => {
+        const el = document.createElement('div');
+        el.className = 'number';
+        el.textContent = num;
+        container.appendChild(el);
+      });
+    }
+
+    function getCurrentGameTime() {
+      const now = new Date();
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      return `${hours}:${minutes}`;
+    }
+
+    function isWithinGameTime() {
+      const now = getCurrentGameTime();
+      return gameTimes.includes(now);
+    }
+
+    function playGame() {
+      if (!isWithinGameTime()) {
+        alert("You can only play once during the scheduled game times.");
+        return;
+      }
+
+      const playBtn = document.getElementById('playBtn');
+      playBtn.disabled = true;
+
+      const winning = getRandomNumbers(5, 100);
+      const machine = getRandomNumbers(5, 100);
+      displayNumbers('winningNumbers', winning);
+      displayNumbers('machineNumbers', machine);
+    }
+
+    function checkTime() {
+      const playBtn = document.getElementById('playBtn');
+      if (isWithinGameTime()) {
+        playBtn.disabled = false;
+      } else {
+        playBtn.disabled = true;
+      }
+    }
+
+    setInterval(checkTime, 60000); // check every minute
+    checkTime(); // initial check
+  </script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GameOne Draw Announcement</title>
+<style>
+    body {
+        background: linear-gradient(to bottom right, #1e3c72, #2a5298);
+        font-family: Arial, sans-serif;
+        color: white;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+    h1 {
+        font-size: 2.5rem;
+        margin-top: 20px;
+        animation: fadeIn 2s ease-in-out;
+    }
+    #host {
+        width: 200px;
+        margin-top: 20px;
+        animation: bounce 2s infinite;
+    }
+    .draw-time {
+        font-size: 1.5rem;
+        margin-top: 10px;
+    }
+    .number-display {
+        font-size: 2rem;
+        margin: 20px 0;
+        font-weight: bold;
+        letter-spacing: 5px;
+        animation: fadeIn 2s ease-in-out;
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        background: gold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+    button:hover {
+        background: orange;
+    }
+    @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+    @keyframes bounce {
+        0%, 100% {transform: translateY(0);}
+        50% {transform: translateY(-10px);}
+    }
+</style>
+</head>
+<body>
+
+<h1>🎉 GAMEONE Draw Announcement 🎉</h1>
+<img id="host" src="C:\Users\IT-Jamesmith\Documents\waltztecnew\media\Mr. IT-Jamesmith.mp4" alt="Mr. IT-Jamesmith Host">
+<div class="draw-time" id="time"></div>
+<div class="number-display" id="winning"></div>
+<div class="number-display" id="machine"></div>
+<button id="announceBtn">🔊 Announce Draw</button>
+
+<script>
+    const drawTimes = [
+        "10:30 AM",
+        "2:30 PM",
+        "4:00 PM",
+        "8:00 PM",
+        "8:30 PM"
+    ];
+
+    let currentTime = drawTimes[new Date().getSeconds() % drawTimes.length];
+    document.getElementById("time").textContent = `🕒 Draw Time: ${currentTime}`;
+
+    function generateNumbers() {
+        let nums = [];
+        while (nums.length < 5) {
+            let n = Math.floor(Math.random() * 100) + 1;
+            if (!nums.includes(n)) nums.push(n);
+        }
+        return nums.join(" - ");
+    }
+
+    let winningNums = generateNumbers();
+    let machineNums = generateNumbers();
+
+    document.getElementById("winning").textContent = `🏆 Winning Numbers: ${winningNums}`;
+    document.getElementById("machine").textContent = `🎯 Machine Numbers: ${machineNums}`;
+
+    // Web Speech API Function
+    function speak(text) {
+        let speech = new SpeechSynthesisUtterance();
+        speech.text = text;
+        speech.lang = "en-GB";
+        speech.pitch = 1;
+        speech.rate = 1;
+        speech.volume = 1;
+        window.speechSynthesis.speak(speech);
+    }
+
+    // Announce button
+    document.getElementById("announceBtn").addEventListener("click", () => {
+        speak(`Hello! This is Mr. Emmanuel from GameOne. 
+        The draw time is ${currentTime}. 
+        Today's winning numbers are: ${winningNums}. 
+        And the machine numbers are: ${machineNums}. Congratulations to all winners!`);
+    });
+</script>
+
+</body>
+</html>

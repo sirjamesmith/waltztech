@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GAMEONE - 100 Ball Game</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url('https://images.unsplash.com/photo-1606741965424-0cdea26fbe68');
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      text-align: center;
+    }
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.75);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    h1 {
+      color: #f1c40f;
+      font-size: 2.5em;
+    }
+    .section {
+      background: rgba(255, 255, 255, 0.1);
+      margin: 30px auto;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 800px;
+    }
+    .numbers {
+      margin: 20px 0;
+    }
+    .number {
+      display: inline-block;
+      background: #f39c12;
+      margin: 5px;
+      padding: 15px;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      font-weight: bold;
+    }
+    button {
+      background-color: #e67e22;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    button:disabled {
+      background-color: #777;
+      cursor: not-allowed;
+    }
+    input, select {
+      padding: 10px;
+      margin: 5px;
+      border-radius: 5px;
+      border: none;
+      width: 80%;
+      max-width: 300px;
+    }
+    form {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>GAMEONE - 100 Ball Game</h1>
+
+    <div class="section">
+      <h2>Player Arena</h2>
+      <p><strong>Game Times:</strong> 10:30am, 2:30pm, 4:00pm, 8:00pm, 8:30pm</p>
+      <button id="playBtn" onclick="playGame()">Play Game</button>
+
+      <div class="numbers">
+        <h3>Winning Numbers</h3>
+        <div id="winningNumbers"></div>
+      </div>
+
+      <div class="numbers">
+        <h3>Machine Numbers</h3>
+        <div id="machineNumbers"></div>
+      </div>
+
+      <form id="submitWinForm">
+        <h3>Submit Your Winning</h3>
+        <input type="text" name="name" placeholder="Full Name" required><br />
+        <input type="number" name="age" placeholder="Age" required><br />
+        <input type="text" name="id" placeholder="ID or Identification Number" required><br />
+        <button type="submit">Submit Winnings</button>
+      </form>
+    </div>
+
+    <div class="section">
+      <h2>Purchase Game Ticket</h2>
+      <p>Select your game time to pay and participate:</p>
+      <select id="gameTime">
+        <option value="10:30">10:30 AM</option>
+        <option value="14:30">2:30 PM</option>
+        <option value="16:00">4:00 PM</option>
+        <option value="20:00">8:00 PM</option>
+        <option value="20:30">8:30 PM</option>
+      </select>
+      <br />
+      <button onclick="payForGame()">Pay and Play</button>
+    </div>
+
+    <div class="section">
+      <h2>Admin Dashboard</h2>
+      <p>Display Winning and Machine Numbers</p>
+      <input type="text" id="adminWinning" placeholder="Winning: e.g. 1,2,3,4,5" />
+      <input type="text" id="adminMachine" placeholder="Machine: e.g. 6,7,8,9,10" />
+      <br />
+      <button onclick="setAdminNumbers()">Set Admin Numbers</button>
+
+      <div class="numbers">
+        <h3>Admin Winning Numbers</h3>
+        <div id="adminWinningNumbers"></div>
+      </div>
+
+      <div class="numbers">
+        <h3>Admin Machine Numbers</h3>
+        <div id="adminMachineNumbers"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const gameTimes = ["10:30", "14:30", "16:00", "20:00", "20:30"];
+    let gamePlayed = false;
+
+    function getRandomNumbers(count, max) {
+      const nums = new Set();
+      while (nums.size < count) {
+        nums.add(Math.floor(Math.random() * max) + 1);
+      }
+      return Array.from(nums);
+    }
+
+    function displayNumbers(id, nums) {
+      const container = document.getElementById(id);
+      container.innerHTML = '';
+      nums.forEach(num => {
+        const el = document.createElement('div');
+        el.className = 'number';
+        el.textContent = num;
+        container.appendChild(el);
+      });
+    }
+
+    function isBeforeGameTime() {
+      const now = new Date();
+      return gameTimes.some(time => {
+        const [h, m] = time.split(":").map(Number);
+        const gameTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m);
+        return now < gameTime;
+      });
+    }
+
+    function playGame() {
+      if (gamePlayed) {
+        alert("You can only play once before the next game.");
+        return;
+      }
+      if (!isBeforeGameTime()) {
+        alert("Game is closed. Please wait for the next scheduled time.");
+        return;
+      }
+      gamePlayed = true;
+      const winning = getRandomNumbers(5, 100);
+      const machine = getRandomNumbers(5, 100);
+      displayNumbers("winningNumbers", winning);
+      displayNumbers("machineNumbers", machine);
+    }
+
+    function setAdminNumbers() {
+      const win = document.getElementById('adminWinning').value.split(',').map(n => parseInt(n.trim()));
+      const mach = document.getElementById('adminMachine').value.split(',').map(n => parseInt(n.trim()));
+      displayNumbers("adminWinningNumbers", win);
+      displayNumbers("adminMachineNumbers", mach);
+    }
+
+    function payForGame() {
+      const selected = document.getElementById('gameTime').value;
+      alert("Redirecting to payment gateway for: " + selected);
+      // Here you'd integrate real payment logic
+    }
+
+    document.getElementById('submitWinForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert("Winning details submitted successfully!");
+      this.reset();
+    });
+  </script>
+</body>
+</html>

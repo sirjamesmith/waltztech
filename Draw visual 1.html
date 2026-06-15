@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GameOne Draw Announcement</title>
+<style>
+    body {
+        background: linear-gradient(to bottom right, #1e3c72, #2a5298);
+        font-family: Arial, sans-serif;
+        color: white;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+    h1 {
+        font-size: 2.5rem;
+        margin-top: 20px;
+        animation: fadeIn 2s ease-in-out;
+    }
+    #host {
+        width: 200px;
+        margin-top: 20px;
+        animation: bounce 2s infinite;
+    }
+    .draw-time {
+        font-size: 1.5rem;
+        margin-top: 10px;
+    }
+    .number-display {
+        font-size: 2rem;
+        margin: 20px 0;
+        font-weight: bold;
+        letter-spacing: 5px;
+        animation: fadeIn 2s ease-in-out;
+    }
+    @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+    @keyframes bounce {
+        0%, 100% {transform: translateY(0);}
+        50% {transform: translateY(-10px);}
+    }
+</style>
+</head>
+<body>
+
+<h1>🎉 GAMEONE Draw Announcement 🎉</h1>
+<img id="host" src="C:\Users\IT-Jamesmith\Documents\waltztecnew\media\Mr. Emmanuel.png" alt="Mr. Emmanuel Host">
+<div class="draw-time" id="time"></div>
+<div class="number-display" id="winning"></div>
+<div class="number-display" id="machine"></div>
+
+<script>
+    // Draw times
+    const drawTimes = [
+        "10:30 AM",
+        "2:30 PM",
+        "4:00 PM",
+        "8:00 PM",
+        "8:30 PM"
+    ];
+
+    // Pick current draw time based on real time
+    let currentTime = drawTimes[new Date().getSeconds() % drawTimes.length];
+    document.getElementById("time").textContent = `🕒 Draw Time: ${currentTime}`;
+
+    // Generate 5 random numbers for winning and machine numbers
+    function generateNumbers() {
+        let nums = [];
+        while (nums.length < 5) {
+            let n = Math.floor(Math.random() * 100) + 1;
+            if (!nums.includes(n)) nums.push(n);
+        }
+        return nums.join(" - ");
+    }
+
+    document.getElementById("winning").textContent = `🏆 Winning Numbers: ${generateNumbers()}`;
+    document.getElementById("machine").textContent = `🎯 Machine Numbers: ${generateNumbers()}`;
+</script>
+
+</body>
+</html>

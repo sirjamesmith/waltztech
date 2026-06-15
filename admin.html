@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Video Tutorials & Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #003366;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+    .login, .course {
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin: 20px 0;
+      padding: 20px;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    input[type="submit"] {
+      background-color: #003366;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    video {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Waltz Technology Academic Video Tutorials</h1>
+
+    <div class="login">
+      <h2>Student Login</h2>
+      <form action="#" method="POST">
+        <label for="userID">User ID:</label>
+        <input type="text" id="userID" name="userID" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <input type="submit" value="Login">
+      </form>
+    </div>
+
+    <div class="login">
+      <h2>Admin Panel - Generate Student Credentials</h2>
+      <form action="#" method="POST" onsubmit="generateCredentials(event)">
+        <label for="studentName">Student Name:</label>
+        <input type="text" id="studentName" required>
+        <input type="submit" value="Generate Credentials">
+      </form>
+      <p id="generatedCredentials"></p>
+    </div>
+
+    <script>
+      function generateCredentials(event) {
+        event.preventDefault();
+        const name = document.getElementById("studentName").value;
+        const userID = "WALTZ" + Math.floor(Math.random() * 10000);
+        const password = Math.random().toString(36).slice(-8);
+        document.getElementById("generatedCredentials").textContent =
+          `Generated ID: ${userID}, Password: ${password}`;
+      }
+    </script>
+
+    <div class="course">
+      <h2>Networking (CCNA)</h2>
+      <video controls>
+        <source src="videos/networking.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <div class="course">
+      <h2>Website Development</h2>
+      <video controls>
+        <source src="videos/webdev.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <div class="course">
+      <h2>Cybersecurity</h2>
+      <video controls>
+        <source src="videos/cybersecurity.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <div class="course">
+      <h2>Desktop Publishing</h2>
+      <video controls>
+        <source src="videos/desktop_publishing.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <div class="course">
+      <h2>Computer Engineering (CompTIA A+)</h2>
+      <video controls>
+        <source src="videos/computer_engineering.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <div class="course">
+      <h2>Project Management</h2>
+      <video controls>
+        <source src="videos/project_management.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <div class="course">
+      <h2>Information Technology</h2>
+      <video controls>
+        <source src="videos/information_technology.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+</body>
+</html>

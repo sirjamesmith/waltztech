@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waltz Technology Academic - Professional IT Courses</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        
+        .courses {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: #1a2a6c;
+        }
+        
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .course-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .course-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .course-card:hover .course-img img {
+            transform: scale(1.05);
+        }
+        
+        .course-content {
+            padding: 1.5rem;
+        }
+        
+        .course-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #1a2a6c;
+        }
+        
+        .course-desc {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .registration {
+            background-color: #1a2a6c;
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .registration .section-title {
+            color: white;
+        }
+        
+        .form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        
+        button:hover {
+            opacity: 0.9;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Waltz Technology Academy</h1>
+            <p class="tagline">Empowering the next generation of IT professionals</p>
+            
+        <a href="t&c.html"><span><strong> Terms and conditions</strong></a></span>
+        <a href="about.html"><span> <strong>About Us</strong></a></span>
+        <a href="index.html"><span> <strong>HOME</strong></a></span>
+        </div>
+    </header>
+    
+    <section class="courses">
+        <div class="container">
+            <h3 class="section-title">Our Courses Online</h3><span><h4>Select your course to proceed</span></h4><br>
+            <div class="course-grid">
+                <!-- CCNA Networking -->
+                <div class="course-card">
+                    <div class="course-img">
+                        <a href="cozdetail.html"><img src="img\IT Supt.jpg"></a>
+                    </div>
+                    
+                    <div class="course-content">
+                        <h3 class="course-title">Networking (CCNA)</h3>
+                        <p class="course-desc">Master the fundamentals of networking, routing, and switching with our CCNA certification program.</p>
+                    </div>
+                </div>
+                
+                <!-- Website Development -->
+                <div class="course-card">
+                    <div class="course-img">
+                         <a href="cozdetail.html"><img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Web Development"></a>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Website Development</h3>
+                        <p class="course-desc">Learn full-stack web development with modern technologies like HTML5, CSS3, JavaScript, and frameworks.</p>
+                    </div>
+                </div>
+                
+                <!-- Cybersecurity -->
+                <div class="course-card">
+                    <div class="course-img">
+                         <a href="cozdetail.html"><img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Cybersecurity"></a>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Cybersecurity</h3>
+                        <p class="course-desc">Develop skills to protect systems and networks from digital attacks in our comprehensive cybersecurity program.</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Publishing -->
+                <div class="course-card">
+                    <div class="course-img">
+                         <a href="cozdetail.html"><img src="https://images.unsplash.com/photo-1541462608143-67571c6738dd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Desktop Publishing"></a>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Desktop Publishing</h3>
+                        <p class="course-desc">Learn professional design and layout techniques using industry-standard software like Adobe InDesign.</p>
+                    </div>
+                </div>
+                
+                <!-- Computer Engineering (CompTIA A+) -->
+                <div class="course-card">
+                    <div class="course-img">
+                         <a href="cozdetail.html"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Computer Engineering"></a>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Computer Engineering (CompTIA A+)</h3>
+                        <p class="course-desc">Gain essential skills for IT support and computer service technicians with CompTIA A+ certification.</p>
+                    </div>
+                </div>
+                
+                <!-- Information Technology -->
+                <div class="course-card">
+                    <div class="course-img">
+                         <a href="cozdetail.html"><img src="img\cybsec.png" alt="cybersecurity"></a>
+                    </div>
+                    
+                    <div class="course-content">
+                        <h3 class="course-title">Information Technology</h3>
+                        <p class="course-desc">Information Technology • Types of IT systems (hardware/software) • IT in industries (health, education, finance, etc.) • Career opportunities in IT ...</p>
+                </div>
+            </div>
+        </div>
+        <br>
+          <!-- Learn Android -->
+                <div class="course-card">
+                    <div class="course-img">
+                         <a href="cozdetail.html"><img src="img\andr.jpg" alt="cybersecurity"></a>
+                    </div>
+                    
+                    <div class="course-content">
+                        <h3 class="course-title">Android Developer</h3>
+                            <p class="course-desc">Learn how to develop android apps and design, upload to google play store...</p>
+                    </div>
+    </section>
+    <form
+  action="https://formspree.io/f/xanooqeo"
+  method="POST">
+
+    <section class="registration">
+        <div class="container">
+            <h2 class="section-title">Register for a Course</h2>
+            <div class="form-container">
+                <form id="registrationForm">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="course">Select Course</label>
+                        <select id="course" name="course" required>
+                            <option value="">-- Choose a course --</option>
+                            <option value="CCNA">Networking (CCNA)</option>
+                            <option value="WebDev">Website Development</option>
+                            <option value="CyberSec">Cybersecurity</option>
+                            <option value="DesktopPub">Desktop Publishing</option>
+                            <option value="CompTIA">Computer Engineering (CompTIA A+)</option>
+                            <option value="PM">Project Management</option>
+                            <option value="IT">Information Technology</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Additional Information</label>
+                        <textarea id="message" name="message" rows="4"></textarea>
+                    </div>
+                    
+                    <button type="submit">Submit Registration</button>
+
+ 
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Waltz Technology Academy. All rights reserved.</p>
+            <p>Contact: infocare@waltztech.com.ng | Phone: +234 815 557 5918</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('fullName').value;
+            const course = document.getElementById('course').value;
+            
+            // In a real application, you would send this data to a server
+            alert(`Thank you, ${name}! Your registration for ${course} has been received. We'll contact you shortly.`);
+            
+            // Reset form
+            this.reset();
+        });
+    </script>
+</body>
+</html>

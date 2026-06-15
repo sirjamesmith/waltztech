@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>100 Ball Game</title>
+  <p><h2>Welcome to GAMEONE == Play and win</h2><meta charset="utf-8"></p>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    .game-box {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .numbers {
+      margin: 10px 0;
+    }
+    .number {
+      display: inline-block;
+      margin: 5px;
+      padding: 10px;
+      background: #3498db;
+      color: white;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      line-height: 20px;
+      font-weight: bold;
+    }
+    .btn {
+      margin: 20px auto;
+      padding: 10px 20px;
+      background: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .schedule {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>100 Ball Game</h1>
+  <div class="game-box">
+    <button class="btn" onclick="playGame()">Play Game</button>
+    <div class="numbers">
+      <h3>Winning Numbers</h3>
+      <div id="winningNumbers"></div>
+    </div>
+    <div class="numbers">
+      <h3>Machine Numbers</h3>
+      <div id="machineNumbers"></div>
+    </div>
+    <div class="schedule">
+      Game Times: 10:30am, 2:30pm, 4:00pm, 8:00pm, 8:30pm
+    </div>
+  </div>
+
+  <script>
+    function getRandomNumbers(count, max) {
+      const numbers = new Set();
+      while (numbers.size < count) {
+        numbers.add(Math.floor(Math.random() * max) + 1);
+      }
+      return Array.from(numbers);
+    }
+
+    function displayNumbers(containerId, numbers) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+      numbers.forEach(num => {
+        const el = document.createElement('div');
+        el.className = 'number';
+        el.textContent = num;
+        container.appendChild(el);
+      });
+    }
+
+    function playGame() {
+      const winning = getRandomNumbers(5, 100);
+      const machine = getRandomNumbers(5, 100);
+      displayNumbers('winningNumbers', winning);
+      displayNumbers('machineNumbers', machine);
+    }
+  </script>
+</body>
+</html>
